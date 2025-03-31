@@ -19,7 +19,12 @@ const TasksSchema = new mongoose.Schema({
     position: {
         type: Number,
         default: 0
-    }
+    },
+    status: {
+        type: String,
+        enum: ['not-started', 'ongoing', 'completed'],
+        default: 'not-started'
+    },
     
 }, {
     timestamps: true

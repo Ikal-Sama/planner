@@ -5,6 +5,7 @@ import {
     deleteTask, 
     getAllTasks, 
     getTaskById, 
+    statusUpdate, 
     toggleTaskStatus, 
     updateTask 
 } from '../controllers/task.controller.js'
@@ -16,6 +17,7 @@ router.post('/:projectId', protectRoute, createTask)
 router.get('/:projectId', protectRoute, getAllTasks)
 router.get('/task/:taskId', protectRoute, getTaskById)
 router.put('/completed/:taskId',protectRoute, toggleTaskStatus)
+router.put('/status/:taskId',protectRoute, statusUpdate)
 
 
 router.route("/:taskId")

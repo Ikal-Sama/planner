@@ -154,3 +154,31 @@ export const toggleTaskStatus = async(req, res) => {
         res.status(500).json({ success: false, message: 'Server error while completing task' });
     }
 }
+
+export const statusUpdate = async(req, res) => {
+    const {taskId} = req.params
+    const {id: userId} = req.user
+    try {
+        const task = await Task.findById(taskId)
+        if(!task){
+            return res.status(404).json({success: false, message: 'Task not found'});
+        }
+        const project = await Project.findOne({ _id: task.projectId, userId });
+        if (!project) {
+            return res.status(403).json({ success: false, message: 'Access denied' });
+        }
+
+        task.status = status;
+        await task.save();
+
+        // 5. Return the updated task
+        res.status(200).json({ 
+            success: true, 
+            message: 'Task status updated successfully',
+            task 
+        });
+    } catch (error) {
+         console.error('Error completing task:', error);
+        res.status(500).json({ success: false, message: 'Server error while updating status in task' });
+    }
+}

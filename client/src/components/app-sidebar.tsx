@@ -25,7 +25,7 @@ const data = [
       {
         id: 2,
         title: "Calendar",
-        url: "#",
+        url: "/calendar",
         icon: Calendar,
       },
     ],

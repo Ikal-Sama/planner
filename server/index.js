@@ -9,6 +9,8 @@ import path from 'path'
 import UserRouter from './routes/userRoute.js'
 import ProjectRouter from './routes/project.route.js'
 import TasksRouter from './routes/task.route.js'
+import ActivityRouter from './routes/activity.route.js'
+
 const PORT = process.env.PORT || 3000
 const __dirname = path.resolve()
 
@@ -30,6 +32,7 @@ app.use(bodyParser.json())
 app.use('/api/users', UserRouter)
 app.use('/api/projects', ProjectRouter)
 app.use('/api/tasks', TasksRouter)
+app.use('/api/activities', ActivityRouter)
 
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static(path.join(__dirname, '../client/dist')))

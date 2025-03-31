@@ -123,3 +123,18 @@ export const deleteTask = async(taskId: string) => {
         throw new Error('An unexpected error occurred');
     }
 }
+
+export const statusUpdate = async(taskId: string) => {
+    try {
+        const response = await axiosInstance.put(`/tasks/status/${taskId}`)
+        return {success: true, data: response.data}
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            // Handle Axios-specific errors
+            const message = error.response?.data?.message || error.message;
+            throw new Error(`API Error: ${message}`);
+        }
+        // Handle non-Axios errors
+        throw new Error('An unexpected error occurred');
+    }
+}
