@@ -21,7 +21,7 @@ export default function LogoutButton() {
   return (
     <div className='group' onClick={handleLogout}>
       <div className='group-hover:bg-accent p-2 rounded-full cursor-pointer text-muted-foreground  transition-colors duration-300 ease-in-out'>
-        <LogOutIcon className='w-5 h-5  group-hover:text-slate-700  stroke-1.5' />
+        <LogOutIcon className='w-5 h-5 text-slate-400  group-hover:text-slate-700  stroke-1.5' />
       </div>
     </div>
   );

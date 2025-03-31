@@ -43,7 +43,7 @@ const data = [
       {
         id: 2,
         title: "Activities",
-        url: "#",
+        url: "/activities",
         icon: Shapes,
       },
     ],

@@ -55,7 +55,7 @@ export default function Projects() {
         <h1 className='text-2xl font-semibold'>Projects</h1>
         <DialogContainer
           triggerButton={
-            <Button>
+            <Button className='cursor-pointer'>
               <Plus />
             </Button>
           }

@@ -11,6 +11,7 @@ import ProtectedAuth from "./components/protect-auth";
 import Projects from "./pages/Projects";
 import NotFound from "./pages/NotFound";
 import Project from "./pages/Project";
+import Activities from "./pages/Activities";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/projects' element={<Projects />} />
             <Route path='/projects/:id' element={<Project />} />
+            <Route path='/activities' element={<Activities />} />
           </Route>
         </Route>
 

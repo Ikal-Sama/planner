@@ -1,40 +1,54 @@
+import LogoutButton from "@/components/Logout-button";
 import { Button } from "@/components/ui/button";
 import { authQueryOptions } from "@/queryOptions/authQueryOptions";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Loader2, Waypoints } from "lucide-react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Github, Instagram, Twitter, Waypoints } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-  const location = useLocation();
-  const queryClient = useQueryClient();
-  const { data, isError, isPending } = useQuery(authQueryOptions());
+  const { data } = useQuery(authQueryOptions());
 
-  if (isPending) {
-    return (
-      <div className='w-full h-screen flex justify-center items-center'>
-        <Loader2 className='w-10 h-10 stroke-3 text-primary animate-spin' />
-      </div>
-    );
-  }
+  // if (isFetched) {
+  //   return (
+  //     <div className='w-full h-screen flex justify-center items-center'>
+  //       <Loader2 className='w-10 h-10 stroke-3 text-primary animate-spin' />
+  //     </div>
+  //   );
+  // }
 
-  if (isError) {
-    queryClient.removeQueries({ queryKey: ["auth"] });
-  }
-
-  if (data) {
-    return <Navigate to='/dashboard' state={{ from: location }} replace />;
-  }
   return (
     <div className='p-5 h-screen bg-gradient-to-br from-black via-blue-900 to-black'>
-      <div className='flex justify-end'>
-        <Link to='/signin'>
-          <Button
-            variant='ghost'
-            className='rounded-full cursor-pointer border text-primary'
-          >
-            Signin
-          </Button>
+      <div className='flex justify-between items-center'>
+        <Link to='/' className='flex gap-1 items-center group'>
+          <Waypoints className='text-primary group-hover:text-blue-700 transition-colors duration-300 ease-in-out' />
+          <h1 className='font-semibold text-blue-600 text-xl group-hover:text-blue-700 transition-colors duration-300 ease-in-out'>
+            Planner
+          </h1>
         </Link>
+        {data ? (
+          <div className='flex items-center gap-5 text-white'>
+            <Link to='/dashboard'>
+              <Button
+                size='sm'
+                variant='ghost'
+                className='cursor-pointer rounded-full border'
+              >
+                Dashboard
+              </Button>
+            </Link>
+            <p>{data.name}</p>
+            <LogoutButton />
+          </div>
+        ) : (
+          <Link to='/signin'>
+            <Button
+              variant='ghost'
+              className='rounded-full cursor-pointer border text-primary'
+            >
+              Signin
+            </Button>
+          </Link>
+        )}
       </div>
       <div className='flex flex-col justify-center items-center mt-20 gap-3'>
         <div className='flex flex-col items-center gap-3'>
@@ -52,9 +66,28 @@ export default function Home() {
             assumenda deserunt. Reprehenderit voluptatum hic labore in.
           </p>
         </div>
-        <Link to='/signin'>
-          <Button className='cursor-pointer'>Get Started</Button>
-        </Link>
+        <div className='flex flex-col gap-4 items-center'>
+          <h2 className='text-xl text-gray-300'>Visit in our</h2>
+          <div className='flex gap-2 items-center'>
+            <Link to='/https://github.com/Ikal-Sama/planner'>
+              <Button variant='destructive' className='cursor-pointer'>
+                <Github />
+              </Button>
+            </Link>
+
+            <Link to='/'>
+              <Button className='cursor-pointer'>
+                <Instagram />
+              </Button>
+            </Link>
+
+            <Link to='/'>
+              <Button className='cursor-pointer bg-black/70 hover:bg-black'>
+                <Twitter />
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

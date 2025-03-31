@@ -17,6 +17,13 @@ type Project = {
 export default function ProjectCard() {
   const { data, isPending } = useQuery(projectQueryOptions());
 
+  const sortedProjects = data
+    ? [...data].sort(
+        (a: Project, b: Project) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      )
+    : [];
+
   if (isPending) {
     return (
       <div className='w-full h-full flex justify-center items-center'>
@@ -26,7 +33,7 @@ export default function ProjectCard() {
   }
   return (
     <div className='grid grid-cols-3 gap-3'>
-      {data.map((project: Project) => {
+      {sortedProjects.map((project: Project) => {
         const totalTasks = project?.tasks.length;
         const completedTasks = project.tasks.filter(
           (task) => task.completed
@@ -37,7 +44,12 @@ export default function ProjectCard() {
         return (
           <Card key={project._id}>
             <CardHeader className='font-semibold text-slate-600'>
-              <Link to={`/projects/${project._id}`}>{project.title}</Link>
+              <Link
+                to={`/projects/${project._id}`}
+                className='hover:text-slate-900 transition-colors duration-300 ease-in-out'
+              >
+                {project.title}
+              </Link>
               <div className='text-xs text-gray-400 font-normal'>
                 {formatDate(project.createdAt)}
               </div>
