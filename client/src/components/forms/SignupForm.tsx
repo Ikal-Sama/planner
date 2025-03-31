@@ -13,12 +13,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signup } from "@/actions/auth";
 import toast from "react-hot-toast";
 import { Loader2 } from "lucide-react";
 
 export default function SignupForm() {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof signupFormSchema>>({
     resolver: zodResolver(signupFormSchema),
     defaultValues: {
@@ -37,6 +38,7 @@ export default function SignupForm() {
         if (data.success) {
           toast.success("Signup successfully!");
           form.reset();
+          navigate("/signin");
         }
         if (data.error) {
           toast.error(data.error);

@@ -32,55 +32,65 @@ export default function ProjectCard() {
     );
   }
   return (
-    <div className='grid grid-cols-3 gap-3'>
-      {sortedProjects.map((project: Project) => {
-        const totalTasks = project?.tasks.length;
-        const completedTasks = project.tasks.filter(
-          (task) => task.completed
-        ).length;
-        const completionPercentage =
-          totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+    <div>
+      {sortedProjects.length > 0 ? (
+        <div className='grid grid-cols-3 gap-3'>
+          {sortedProjects.map((project: Project) => {
+            const totalTasks = project?.tasks.length;
+            const completedTasks = project.tasks.filter(
+              (task) => task.completed
+            ).length;
+            const completionPercentage =
+              totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
 
-        return (
-          <Card key={project._id}>
-            <CardHeader className='font-semibold text-slate-600'>
-              <Link
-                to={`/projects/${project._id}`}
-                className='hover:text-slate-900 transition-colors duration-300 ease-in-out'
-              >
-                {project.title}
-              </Link>
-              <div className='text-xs text-gray-400 font-normal'>
-                {formatDate(project.createdAt)}
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className='mt-2 text-sm text-center'>
-                {totalTasks === 0 ? (
-                  <div>
-                    <p className='mb-3 text-muted-foreground'>No task yet</p>
-                    <Link to={`/projects/${project._id}`}>
-                      <Button
-                        size='icon'
-                        className='rounded-full cursor-pointer'
-                      >
-                        <Plus className='w-4 h-4' />
-                      </Button>
-                    </Link>
+            return (
+              <Card key={project._id}>
+                <CardHeader className='font-semibold text-slate-600'>
+                  <Link
+                    to={`/projects/${project._id}`}
+                    className='hover:text-slate-900 transition-colors duration-300 ease-in-out'
+                  >
+                    {project.title}
+                  </Link>
+                  <div className='text-xs text-gray-400 font-normal'>
+                    {formatDate(project.createdAt)}
                   </div>
-                ) : (
-                  <div className='flex flex-col gap-2'>
-                    <p className='text-muted-foreground text-sm'>
-                      {completedTasks} / {totalTasks} tasks completed
-                    </p>
-                    <Progress value={completionPercentage} />
+                </CardHeader>
+                <CardContent>
+                  <div className='mt-2 text-sm text-center'>
+                    {totalTasks === 0 ? (
+                      <div>
+                        <p className='mb-3 text-muted-foreground'>
+                          No task yet
+                        </p>
+                        <Link to={`/projects/${project._id}`}>
+                          <Button
+                            size='icon'
+                            className='rounded-full cursor-pointer'
+                          >
+                            <Plus className='w-4 h-4' />
+                          </Button>
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className='flex flex-col gap-2'>
+                        <p className='text-muted-foreground text-sm'>
+                          {completedTasks} / {totalTasks} tasks completed
+                        </p>
+                        <Progress value={completionPercentage} />
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        );
-      })}
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      ) : (
+        <div className='flex justify-center items-center mt-20'>
+          <h1 className='text-lg text-muted-foreground'>No project yet!</h1>
+        </div>
+      )}
     </div>
   );
 }

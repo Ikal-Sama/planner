@@ -69,7 +69,7 @@ export default function Home() {
         <div className='flex flex-col gap-4 items-center'>
           <h2 className='text-xl text-gray-300'>Visit in our</h2>
           <div className='flex gap-2 items-center'>
-            <Link to='/https://github.com/Ikal-Sama/planner'>
+            <Link to='https://github.com/Ikal-Sama/planner'>
               <Button variant='destructive' className='cursor-pointer'>
                 <Github />
               </Button>
