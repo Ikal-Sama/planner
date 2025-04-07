@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { format, isToday } from "date-fns";
+import { format } from "date-fns";
 import { activityQueryOptions } from "@/queryOptions/activityQueryOptions";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -44,24 +44,24 @@ export default function ActivityCalendar() {
     return null;
   };
 
-  const dateClassName = (date: Date) => {
-    const formattedDate = format(date, "yyyy-MM-dd");
-    const activityExists = hasActivity(date);
+  // const dateClassName = (date: Date) => {
+  //   const formattedDate = format(date, "yyyy-MM-dd");
+  //   const activityExists = hasActivity(date);
 
-    // Today's date styling
-    if (isToday(date)) return "bg-blue-500 text-white rounded-full";
+  //   // Today's date styling
+  //   if (isToday(date)) return "bg-blue-500 text-white rounded-full";
 
-    // Selected date with activity styling
-    if (
-      selectedDate &&
-      activityExists &&
-      format(selectedDate, "yyyy-MM-dd") === formattedDate
-    ) {
-      return "bg-yellow-300 rounded-full";
-    }
+  //   // Selected date with activity styling
+  //   if (
+  //     selectedDate &&
+  //     activityExists &&
+  //     format(selectedDate, "yyyy-MM-dd") === formattedDate
+  //   ) {
+  //     return "bg-yellow-300 rounded-full";
+  //   }
 
-    return "";
-  };
+  //   return "";
+  // };
 
   return (
     <div className='flex flex-col md:flex-row gap-6 p-6 rounded-lg w-full mx-auto'>
@@ -76,7 +76,7 @@ export default function ActivityCalendar() {
             mode='single'
             selected={selectedDate}
             onSelect={setSelectedDate}
-            className='rounded-md border w-full'
+            className='rounded-md flex justify-center w-full'
             components={{
               DayContent: (props) => (
                 <div className='relative'>
@@ -103,9 +103,7 @@ export default function ActivityCalendar() {
         <CardHeader>
           <CardTitle className='text-lg font-medium text-gray-700 text-center'>
             Activities on{" "}
-            {selectedDate
-              ? format(selectedDate, "yyyy-MM-dd")
-              : "Select a Date"}
+            {selectedDate ? format(selectedDate, "yyyy-MM-dd") : "-/-/-"}
           </CardTitle>
         </CardHeader>
         <CardContent>

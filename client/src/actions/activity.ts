@@ -37,3 +37,17 @@ export const getUsersActivities = async() => {
         return { error: "Failed to fetch activities. Please try again." };
     }
 }
+
+export const getActivityById = async(id: string) => {
+    try {
+        const response = await axiosInstance.get(`/activities/${id}`);
+        return response.data;
+    } catch (error) {
+        if (error instanceof z.ZodError) {
+            console.error("Validation Error:", error.errors);
+            return { error: error.errors.map((err) => err.message).join(", ") };
+        }
+        console.error("API Error:", error);
+        return { error: "Failed to fetch activity. Please try again." };
+    }
+}
