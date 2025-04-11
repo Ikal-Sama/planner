@@ -1,10 +1,17 @@
-import { getActivityById, getUsersActivities } from '@/actions/activity'
+import { getActivityById, getAllAcitivy, getUsersActivities } from '@/actions/activity'
 import {queryOptions} from '@tanstack/react-query'
 
 export const activityQueryOptions = () => {
     return queryOptions({
         queryKey: ['activities'], // More specific key
         queryFn:  getUsersActivities
+    })
+}
+
+export const getAllActivitiesQueryOptions = () => {
+    return queryOptions({
+        queryKey: ['activities'],
+        queryFn: getAllAcitivy
     })
 }
 

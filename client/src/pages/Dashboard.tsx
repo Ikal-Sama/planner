@@ -1,3 +1,10 @@
+import CardsDashboard from "@/components/CardsDashboard";
+
 export default function Dashboard() {
-  return <div>Dashboard</div>;
+  return (
+    <div>
+      {/* TOTALSCARD */}
+      <CardsDashboard />
+    </div>
+  );
 }

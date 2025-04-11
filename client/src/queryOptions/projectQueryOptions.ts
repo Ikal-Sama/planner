@@ -1,4 +1,4 @@
-import { getProjectById, getUserProject } from '@/actions/projects'
+import { getAllProjects, getProjectById, getUserProject } from '@/actions/projects'
 import { getTaskById } from '@/actions/tasks'
 import {queryOptions} from '@tanstack/react-query'
 
@@ -7,6 +7,13 @@ export const projectQueryOptions = () => {
         queryKey: ['projects'], // More specific key
         queryFn: getUserProject,
         staleTime: 0
+    })
+}
+
+export const getAllProjectsOptions = () => {
+    return queryOptions({
+        queryKey: ["projects"],
+        queryFn: getAllProjects
     })
 }
 

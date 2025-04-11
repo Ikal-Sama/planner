@@ -63,6 +63,19 @@ type Tasks =
     }
 
 
+    export const getAllProjects = async() => {
+        try {
+            const response = await axiosInstance.get('/projects/all')
+            return response.data
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                const message = error.response?.data?.message || error.message;
+                throw new Error(`API Error: ${message}`);
+            }
+            throw new Error('An unexpected error occurred while fetching projects');
+        }
+    }
+
 export const getProjectById = async (projectId: string): Promise<Project> => {
     try {
         const response = await axiosInstance.get(`/projects/${projectId}`);
