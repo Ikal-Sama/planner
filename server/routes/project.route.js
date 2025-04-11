@@ -3,6 +3,7 @@ import { protectRoute } from '../utils/verifyToken.js'
 import { 
     createProject, 
     deleteProject, 
+    getAllProjects, 
     getProjectById, 
     getProjects, 
     updateProject 
@@ -12,6 +13,7 @@ const router = express.Router()
 
 router.post('/', protectRoute, createProject)
 router.get('/', protectRoute, getProjects)
+router.get('/all', protectRoute, getAllProjects)
 
 router.route("/:id")
     .put(protectRoute, updateProject)

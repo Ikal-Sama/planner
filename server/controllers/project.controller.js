@@ -33,6 +33,16 @@ export const getProjects = async(req, res) => {
     }
 }
 
+export const getAllProjects = async(req, res) => {
+    try {
+        const projects = await Project.find()
+        return res.status(200).json(projects)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message: 'Server Error in fetching all projects'})
+    }
+}
+
 export const getProjectById = async(req, res) => {
     const {id} = req.params
     try {

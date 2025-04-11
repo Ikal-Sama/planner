@@ -39,6 +39,17 @@ export const getUserActivities = async (req, res) => {
     }
 };
 
+// Get All Activities
+export const getAllActivities = async (req, res) => {
+    try {
+        const activities = await Activity.find();
+        res.status(200).json(activities);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server Error in fetching activities" });
+    }
+};
+
 // Get a Single Activity
 export const getActivityById = async (req, res) => {
     const { id } = req.params;
