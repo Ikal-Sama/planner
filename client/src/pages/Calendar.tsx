@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { activityQueryOptions } from "@/queryOptions/activityQueryOptions";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { enUS } from "date-fns/locale";
 
 interface Activity {
   _id: string;
@@ -27,11 +28,20 @@ export default function ActivityCalendar() {
     );
 
   // Function to check if an activity exists for a given date
+  // Get the current date for comparison
+  const today = new Date();
+
+  // Function to check if an activity exists for a given date
   const hasActivity = (date: Date) => {
     const formattedDate = format(date, "yyyy-MM-dd");
-    return activities?.some(
-      (activity: Activity) =>
-        format(new Date(activity.scheduledDate), "yyyy-MM-dd") === formattedDate
+    return (
+      activities?.filter(
+        (activity: Activity) =>
+          // Filter out past activities
+          new Date(activity.scheduledDate) >= today &&
+          format(new Date(activity.scheduledDate), "yyyy-MM-dd") ===
+            formattedDate
+      ).length > 0
     );
   };
 
@@ -43,25 +53,6 @@ export default function ActivityCalendar() {
     }
     return null;
   };
-
-  // const dateClassName = (date: Date) => {
-  //   const formattedDate = format(date, "yyyy-MM-dd");
-  //   const activityExists = hasActivity(date);
-
-  //   // Today's date styling
-  //   if (isToday(date)) return "bg-blue-500 text-white rounded-full";
-
-  //   // Selected date with activity styling
-  //   if (
-  //     selectedDate &&
-  //     activityExists &&
-  //     format(selectedDate, "yyyy-MM-dd") === formattedDate
-  //   ) {
-  //     return "bg-yellow-300 rounded-full";
-  //   }
-
-  //   return "";
-  // };
 
   return (
     <div className='flex flex-col md:flex-row gap-6 p-6 rounded-lg w-full mx-auto'>
@@ -78,21 +69,32 @@ export default function ActivityCalendar() {
             onSelect={setSelectedDate}
             className='rounded-md flex justify-center w-full'
             components={{
-              DayContent: (props: { date: Date }) => (
-                <div className='relative'>
-                  {props.date.getDate()}
-                  {dateContent(props.date)}
-                </div>
-              ),
+              DayContent: (props: { date: Date }) => {
+                // Check if the day is Sunday (0)
+                const isSunday = props.date.getDay() === 0;
+                return (
+                  <div className={isSunday ? "text-red-500" : ""}>
+                    {props.date.getDate()}
+                    {dateContent(props.date)}
+                  </div>
+                );
+              },
             }}
             modifiers={{
               hasActivity:
-                activities?.map(
-                  (activity: Activity) => new Date(activity.scheduledDate)
-                ) || [],
+                activities
+                  ?.filter(
+                    (activity: Activity) =>
+                      // Only include activities that are not in the past
+                      new Date(activity.scheduledDate) >= today
+                  )
+                  .map(
+                    (activity: Activity) => new Date(activity.scheduledDate)
+                  ) || [],
             }}
             modifiersClassNames={{
-              hasActivity: "bg-yellow-300 rounded-full",
+              hasActivity:
+                "relative after:absolute after:bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-1.5 after:h-1.5 after:bg-red-500 after:rounded-full",
               today: "bg-blue-500 text-white rounded-full",
             }}
           />
