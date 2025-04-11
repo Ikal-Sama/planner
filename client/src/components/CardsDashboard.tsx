@@ -1,19 +1,29 @@
-import {
-  getAllProjectsOptions,
-  projectQueryOptions,
-} from "@/queryOptions/projectQueryOptions";
+import { projectQueryOptions } from "@/queryOptions/projectQueryOptions";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader } from "./ui/card";
 import { activityQueryOptions } from "@/queryOptions/activityQueryOptions";
 import { BicepsFlexed, Folder, ListTodo } from "lucide-react";
 
+interface Task {
+  id: string;
+  name: string;
+}
+
+interface Project {
+  id: string;
+  name: string;
+  tasks?: Task[];
+}
+
 export default function CardsDashboard() {
   const { data: projects } = useQuery(projectQueryOptions());
   const { data: activities } = useQuery(activityQueryOptions());
 
-  //   console.log("PRJECTS WITH TASKS", projects);
   const totalTasks = projects
-    ? projects.reduce((sum, project) => sum + (project.tasks?.length || 0), 0)
+    ? (projects as Project[]).reduce(
+        (sum, project) => sum + (project.tasks?.length || 0),
+        0
+      )
     : 0;
 
   return (
