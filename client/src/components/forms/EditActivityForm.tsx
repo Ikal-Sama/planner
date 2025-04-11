@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -124,8 +123,10 @@ export default function EditActivityForm({ itemId }: { itemId: string }) {
                     <Calendar
                       mode='single'
                       selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) => date < new Date()}
+                      onSelect={
+                        field.onChange as (date: Date | undefined) => void
+                      }
+                      disabled={(date: Date) => date < new Date()}
                       initialFocus
                     />
                   </PopoverContent>

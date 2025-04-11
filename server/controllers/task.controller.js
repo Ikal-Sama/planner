@@ -30,7 +30,7 @@ export const createTask = async (req, res) => {
     }
 }
 
-export const getAllTasks = async(req, res) => {
+export const getAllUserTasks = async(req, res) => {
     const {projectId} = req.params
     try {
         const tasks = await Task.find({
