@@ -78,7 +78,7 @@ export default function ActivityCalendar() {
             onSelect={setSelectedDate}
             className='rounded-md flex justify-center w-full'
             components={{
-              DayContent: (props) => (
+              DayContent: (props: { date: Date }) => (
                 <div className='relative'>
                   {props.date.getDate()}
                   {dateContent(props.date)}
