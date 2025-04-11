@@ -64,12 +64,12 @@ export default function Projects() {
           <AddProjectForm />
         </DialogContainer>
       </div>
-      <div className='flex gap-3 items-center h-full w-full'>
+      <div className='flex flex-col md:flex-col lg:flex-row gap-3 items-center h-full w-full'>
         <div className='w-full h-full '>
           <ProjectCard />
         </div>
-        <div className='w-1/3 flex flex-col gap-3 h-full'>
-          <div className='bg-blue-50 rounded-md h-64 p-3 shadow'>
+        <div className='w-full lg:w-1/3 flex flex-row lg:flex-col gap-3 h-full'>
+          <div className='bg-blue-50 rounded-md h-64 p-3 shadow w-full'>
             <h2 className=' font-semibold'>Total Completion</h2>
             {/* <p className='text-2xl font-bold'>{calculateTotalCompletion()}%</p> */}
             <div className='flex justify-center items-center mt-5'>
@@ -87,7 +87,7 @@ export default function Projects() {
               </div>
             </div>
           </div>
-          <div className='bg-slate-50 rounded-md shadow h-full p-3'>
+          <div className='bg-slate-50 rounded-md shadow h-full p-3 w-full'>
             <h2 className=' font-semibold mb-2'>Recent Completed Tasks</h2>
             <ul className='mt-5'>
               {getRecentCompletedTasks().map((task: Tasks) => (

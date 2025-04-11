@@ -34,7 +34,7 @@ export default function ProjectCard() {
   return (
     <div>
       {sortedProjects.length > 0 ? (
-        <div className='grid grid-cols-3 gap-3'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-3'>
           {sortedProjects.map((project: Project) => {
             const totalTasks = project?.tasks.length;
             const completedTasks = project.tasks.filter(

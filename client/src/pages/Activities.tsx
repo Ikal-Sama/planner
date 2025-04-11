@@ -55,7 +55,7 @@ export default function Activities() {
       </div>
       <div className=''>
         {data && data.length > 0 ? (
-          <div className='grid grid-cols-3 gap-5 mt-10'>
+          <div className='grid grid-cols-1 md:grid-cols-3  gap-5 mt-10'>
             {data.map((item: Activity) => (
               <Card key={item._id} className='p-3 w-[310px]'>
                 <div className='flex justify-between'>

@@ -61,7 +61,7 @@ export default function ActivityCalendar() {
             Calendar
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className='w-full'>
           <Calendar
             mode='single'
             selected={selectedDate}

@@ -27,7 +27,7 @@ export default function CardsDashboard() {
     : 0;
 
   return (
-    <div className='grid grid-cols-3 gap-3'>
+    <div className='grid grid-cols-1 md:grid-cols-3 lg:gridcols-4 gap-3'>
       <Card className='p-5 bg-blue-300 text-white'>
         <CardHeader className='text-xl font-semibold uppercase flex items-center'>
           <Folder /> Projects
