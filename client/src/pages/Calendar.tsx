@@ -4,7 +4,6 @@ import { format } from "date-fns";
 import { activityQueryOptions } from "@/queryOptions/activityQueryOptions";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { enUS } from "date-fns/locale";
 
 interface Activity {
   _id: string;
